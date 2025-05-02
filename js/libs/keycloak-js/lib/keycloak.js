@@ -174,6 +174,10 @@ function Keycloak (config) {
               kc.forwardParameters = initOptions.forwardParameters;
             }
 
+            if (initOptions.noPrompt) {
+                kc.noPrompt = initOptions.noPrompt;
+            }
+
             if (typeof initOptions.messageReceiveTimeout === 'number' && initOptions.messageReceiveTimeout > 0) {
                 kc.messageReceiveTimeout = initOptions.messageReceiveTimeout;
             } else {
@@ -437,7 +441,7 @@ function Keycloak (config) {
             url = url + '&nonce=' + encodeURIComponent(nonce);
         }
 
-        if (options && options.prompt) {
+        if (options && options.prompt && !kc.noPrompt) {
             url += '&prompt=' + encodeURIComponent(options.prompt);
         }
 
